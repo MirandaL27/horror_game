@@ -17,6 +17,9 @@ class Map {
     findNodeByIndex(index) {
         return this.graph[index];
     }
+    getNextNode(direction, nodeIndex){
+        return this.graph[nodeIndex][direction];
+    }
 }
 
 let map = new Map();

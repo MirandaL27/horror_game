@@ -8,11 +8,11 @@ const Background = (props) => {
     useEffect(() => {
         async function getImage(name) {
             const res = await import(`../../assets/environment/backgrounds/${name}`);
-            //console.log(res);
+            console.log(res);
             setImage(res);
         }
         getImage(backGroundImageName);
-        },[]);
+        },[backGroundImageName]);
         //console.log(image);
 
     return (

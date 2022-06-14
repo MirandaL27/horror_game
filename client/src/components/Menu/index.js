@@ -5,7 +5,7 @@ const Menu = (props) => {
     const {nodeIndex}  = props;
     console.log(nodeIndex);
     let node = map.findNodeByIndex(nodeIndex);
-    console.log(map);
+    console.log(node);
     let itemArray = [];
     return (
         <div>
