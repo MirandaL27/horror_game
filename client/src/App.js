@@ -58,9 +58,10 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //     document.addEventListener("keydown", handleKeyDown);
-  // },[]);
+  useEffect(() => {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+  },[currentNode]);
 
   return (
     <ApolloProvider client={client}>
