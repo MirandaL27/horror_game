@@ -13,13 +13,13 @@ class graphNode {
         this.south = -1;
         this.east = -1;
         this.west = -1;
-        this.items = [];
+        this.items = new itemClass();
     }
     setFileName(name){
         this.fileName = name;
     }
     setItems(arr){
-        this.items = arr;
+        this.items.addItems(arr);
     }
     setEdges(north, south, east, west){
         this.north = north;
