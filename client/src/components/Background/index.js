@@ -13,7 +13,6 @@ const Background = (props) => {
         }
         getImage(backGroundImageName);
         },[backGroundImageName]);
-        //console.log(image);
 
     return (
         <div>

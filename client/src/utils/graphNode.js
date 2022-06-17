@@ -1,4 +1,4 @@
-
+import itemClass from '../utils/items'
 // create a node class for the map graph.
 class graphNode {
     fileName;
@@ -6,15 +6,20 @@ class graphNode {
     south;
     east;
     west;
+    items;
     graphNode() {
         this.fileName = "";
         this.north = -1;
         this.south = -1;
         this.east = -1;
         this.west = -1;
+        this.items = [];
     }
     setFileName(name){
         this.fileName = name;
+    }
+    setItems(arr){
+        this.items = arr;
     }
     setEdges(north, south, east, west){
         this.north = north;
