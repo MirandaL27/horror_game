@@ -7,7 +7,7 @@ class graphNode {
     east;
     west;
     items;
-    graphNode() {
+    constructor() {
         this.fileName = "";
         this.north = -1;
         this.south = -1;

@@ -1,7 +1,7 @@
 // create an items class for items on the map.
 class Items {
     itemArray;
-    Items() {
+    constructor() {
         this.itemArray = [];
     }
     addItem(fileName, itemName, position, isHidden){
@@ -9,7 +9,7 @@ class Items {
     }
     addItems(arr){
         for(let i=0;i<arr.length;i++){
-            itemsArray.push(arr[i]);
+            this.itemArray.push(arr[i]);
         }
     }
     findItemByName(name){

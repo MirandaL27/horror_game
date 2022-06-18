@@ -22,7 +22,7 @@ class Map {
         return this.graph[nodeIndex][direction];
     }
     getItems(index){
-        return this.graph[index][items];
+        return (this.graph[index]["items"] ? this.graph[index]["items"] : []);
     }
 }
 

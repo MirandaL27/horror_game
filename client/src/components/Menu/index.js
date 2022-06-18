@@ -3,13 +3,13 @@ import Background from '../Background';
 import map from '../../utils/map';
 const Menu = (props) => {
     const {nodeIndex}  = props;
-    console.log(nodeIndex);
+    //console.log(nodeIndex);
     let node = map.findNodeByIndex(nodeIndex);
     console.log(node);
-    let itemArray = [];
+    let itemArray = map.getItems(nodeIndex);
     return (
         <div>
-            <Background items = {itemArray} backGroundImageName = {node.fileName}></Background>
+            <Background items = {itemArray.itemArray} backGroundImageName = {node.fileName}></Background>
         </div>
     );
 }
