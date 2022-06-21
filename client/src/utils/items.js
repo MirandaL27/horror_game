@@ -4,8 +4,8 @@ class Items {
     constructor() {
         this.itemArray = [];
     }
-    addItem(fileName, itemName, position, isHidden){
-        this.itemArray.push({name: itemName, fileName: fileName, pos: position, isHidden: isHidden});
+    addItem(fileName, itemName, position, size, depth, isHidden){
+        this.itemArray.push({name: itemName, fileName: fileName, pos: position, scale: size,zIndex: depth, isHidden: isHidden});
     }
     addItems(arr){
         for(let i=0;i<arr.length;i++){

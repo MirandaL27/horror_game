@@ -8,7 +8,7 @@ const Menu = (props) => {
     console.log(node);
     let itemArray = map.getItems(nodeIndex);
     return (
-        <div>
+        <div style={{width:"100vw", height: '100vh'}}>
             <Background items = {itemArray.itemArray} backGroundImageName = {node.fileName}></Background>
         </div>
     );

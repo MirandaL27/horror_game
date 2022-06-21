@@ -14,7 +14,7 @@ const Item = (props) => {
         },[itemImageName]);
 
     return (
-        <div>
+        <div className = "clickable" style={{position: 'absolute', left: `${posX}}px`, bottom: `${posY}px`, border: '2px solid green'}}>
             <img src = {image.default}></img>
         </div>
     );
