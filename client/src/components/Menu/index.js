@@ -12,7 +12,7 @@ const Menu = (props) => {
         <div style={{width:"100vw", height: '100vh'}}>
             <Background items = {itemArray.itemArray} backGroundImageName = {node.fileName} setIsItemModalHidden={setIsItemModalHidden} setCurrentItem={setCurrentItem} setCanMove={setCanMove}></Background>
 
-            {!isItemModalHidden && <ItemModal itemImageName = {item.fileName} name = {item.name} interactions={item.interactions} alt={item.alt}></ItemModal>}
+            {!isItemModalHidden && <ItemModal itemImageName = {item.fileName} name = {item.name} interactions={item.interactions} alt={item.alt} setCanMove = {setCanMove} setIsItemModalHidden={setIsItemModalHidden}></ItemModal>}
         </div>
     );
 }

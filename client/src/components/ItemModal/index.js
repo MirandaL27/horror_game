@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const ItemModal = (props) => {
     const [image, setImage] = useState({});
-    const { itemImageName, name, interactions, alt } = props;
+    const { itemImageName, name, interactions, alt, setCanMove, setIsItemModalHidden} = props;
 
     useEffect(() => {
         async function getImage(name) {
@@ -16,9 +16,19 @@ const ItemModal = (props) => {
     const handleInteractionClick = (event) => {
         if(event.target.className === "put_back"){
             console.log("put back was clicked");
+            //set isHidden on background item to false again.
+            //set canMove to true - allow movement with the arrow keys again
+            //set isItemModalHidden to true - close the item modal
+            setIsItemModalHidden(true);
+            setCanMove(true);
         }
         else if(event.target.className === 'take'){
             console.log("take was clicked");
+            //add item to inventory
+            //set canMove to true - allow movement with the arror keys again
+            //set isItemModalHidden to true - close the item modal
+            setIsItemModalHidden(true);
+            setCanMove(true);
         }
     }
 
