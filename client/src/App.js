@@ -25,35 +25,40 @@ const client = new ApolloClient({
 
 function App() {
   const [currentNode, setCurrentNode] = useState(0);
-  //console.log("current node initial value",currentNode);
+  const [isItemModalHidden, setIsItemModalHidden] = useState(true);
+  const [currentItem, setCurrentItem] = useState(-1);
+  const [canMove, setCanMove] = useState(true);
+  console.log("canMove",canMove);
   const handleKeyDown = (event) => {
-    if(event.keyCode === 38) { 
-      let temp = map.getNextNode('north', currentNode);
-      //console.log('up arrow pressed', temp);
-      if(temp > -1){
-        setCurrentNode(temp);
+    if(canMove){
+      if(event.keyCode === 38) { 
+        let temp = map.getNextNode('north', currentNode);
+        console.log('up arrow pressed', temp);
+        if(temp > -1){
+          setCurrentNode(temp);
+        }
       }
-    }
-    else if(event.keyCode === 39){
-      //console.log("current node inside handleKeyDown",currentNode);
-      let temp = map.getNextNode('east', currentNode);
-      //console.log('right arrow pressed', temp);
-      if(temp > -1){
-        setCurrentNode(temp);
+      else if(event.keyCode === 39){
+        //console.log("current node inside handleKeyDown",currentNode);
+        let temp = map.getNextNode('east', currentNode);
+        console.log('right arrow pressed', temp);
+        if(temp > -1){
+          setCurrentNode(temp);
+        }
       }
-    }
-    else if(event.keyCode === 40){
-      let temp = map.getNextNode('south', currentNode);
-      //console.log('down arrow pressed', temp);
-      if(temp > -1){
-        setCurrentNode(temp);
+      else if(event.keyCode === 40){
+        let temp = map.getNextNode('south', currentNode);
+        console.log('down arrow pressed', temp);
+        if(temp > -1){
+          setCurrentNode(temp);
+        }
       }
-    }
-    else if(event.keyCode === 37){
-      let temp = map.getNextNode('west', currentNode);
-      //console.log('left arrow pressed', temp);
-      if(temp > -1){
-        setCurrentNode(temp);
+      else if(event.keyCode === 37){
+        let temp = map.getNextNode('west', currentNode);
+        console.log('left arrow pressed', temp);
+        if(temp > -1){
+          setCurrentNode(temp);
+        }
       }
     }
   };
@@ -61,11 +66,12 @@ function App() {
   useEffect(() => {
       document.addEventListener("keydown", handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
-  },[currentNode]);
+  },[currentNode, canMove]);
 
   return (
     <ApolloProvider client={client}>
-      <Menu nodeIndex = {currentNode}></Menu>
+      <Menu nodeIndex = {currentNode} setIsItemModalHidden = {setIsItemModalHidden} isItemModalHidden = {isItemModalHidden} currentItem={currentItem} setCurrentItem={setCurrentItem} setCanMove = {setCanMove}></Menu>
+      
       <Router>
         <>
         </>
