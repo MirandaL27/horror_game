@@ -20,7 +20,7 @@ const Background = (props) => {
             <img style = {{border: '2px solid red', height: '100%', width: 'auto'}} src = {image.default}></img>
             <div style={{position: 'absolute', left: '0px', bottom: '0px', border: '2px solid blue', height:"100%", width:'100%'}}>
                 {shownItems.map((elem, index) => (
-                    <Item key = {index} itemImageName = {elem.fileName} posX = {elem.pos.x} posY = {elem.pos.y}></Item>
+                    <Item key = {index} itemImageName = {elem.fileName} posX = {elem.pos.x} posY = {elem.pos.y} scale = {elem.scale} isHidden = {elem.isHidden} interactions = {elem.interactions}></Item>
                 ))}
             </div>
         </div>
