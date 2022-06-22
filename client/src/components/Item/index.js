@@ -7,20 +7,15 @@ const Item = (props) => {
     useEffect(() => {
         async function getImage(name) {
             const res = await import(`../../assets/environment/items/${name}`);
-            console.log(res);
             setImage(res);
         }
         getImage(itemImageName);
     }, [itemImageName]);
     const handleItemClick = (event) => {
-        console.log("clicked on item",interactions);
         setIsItemModalHidden(false);
-        console.log(index);
         setCurrentItem(index);
         setCanMove(false);
         //need to hide the item in the background
-        //need to open the item modal component
-        //need to render the interaction options as buttons on the modal component
 
     }
 

@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const ItemModal = (props) => {
     const [image, setImage] = useState({});
-    const { itemImageName, name, interactions, alt, setCanMove, setIsItemModalHidden} = props;
+    const { itemImageName, name, interactions, alt, setCanMove, setIsItemModalHidden ,setPlayerInventory, playerInventory} = props;
 
     useEffect(() => {
         async function getImage(name) {
             const res = await import(`../../assets/environment/items/${name}`);
-            console.log(res);
             setImage(res);
         }
         getImage(itemImageName);
@@ -29,6 +28,7 @@ const ItemModal = (props) => {
             //set isItemModalHidden to true - close the item modal
             setIsItemModalHidden(true);
             setCanMove(true);
+            playerInventory.addItemToInventory(itemImageName, name, false, alt);
         }
     }
 

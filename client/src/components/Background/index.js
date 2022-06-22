@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Item from '../Item'
-//import image from '../../assets/environment/backgrounds/bedroom_east_wall_test.jpg';
 
 const Background = (props) => {
     const [image, setImage] = useState({}); 
@@ -9,7 +8,6 @@ const Background = (props) => {
     useEffect(() => {
         async function getImage(name) {
             const res = await import(`../../assets/environment/backgrounds/${name}`);
-            console.log(res);
             setImage(res);
         }
         getImage(backGroundImageName);
