@@ -73,9 +73,16 @@ function App() {
   };
 
   useEffect(() => {
+    //this use effect adds the arrow key event listener so that the game can be controlled with the arrow keys
       document.addEventListener("keydown", handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
   },[currentNode, canMove]);
+
+  useEffect(() => {
+    //this useEffect calls a series of functions that are needed to start up the game
+    console.log("startup sequence");
+    setCanMove(true);
+  }, [gameIsStarted]);
 
   return (
     <ApolloProvider client={client}>
