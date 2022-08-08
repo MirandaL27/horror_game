@@ -5,6 +5,11 @@ import { setContext } from '@apollo/client/link/context';
 import Menu from "./components/Menu";
 import map from './utils/map';
 import inventory from './utils/inventory';
+import Title from "./components/Title";
+import Settings from "./components/Settings";
+import Extras from "./components/Extras";
+import Help from "./components/Help";
+import Achievements from "./components/Achievements";
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -28,7 +33,9 @@ function App() {
   const [currentNode, setCurrentNode] = useState(0);
   const [isItemModalHidden, setIsItemModalHidden] = useState(true);
   const [currentItem, setCurrentItem] = useState(-1);
-  const [canMove, setCanMove] = useState(true);
+  const [canMove, setCanMove] = useState(false);
+  const [gameIsStarted, setGameIsStarted] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState("Title");
   const [playerInventory, setPlayerInventory] = useState(new inventory());
   //console.log("inventory ", playerInventory);
   const handleKeyDown = (event) => {
@@ -72,8 +79,12 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Menu nodeIndex = {currentNode} setIsItemModalHidden = {setIsItemModalHidden} isItemModalHidden = {isItemModalHidden} currentItem={currentItem} setCurrentItem={setCurrentItem} setCanMove = {setCanMove} playerInventory={playerInventory} setPlayerInventory={setPlayerInventory}></Menu>
-      
+      {gameIsStarted && <Menu nodeIndex = {currentNode} setIsItemModalHidden = {setIsItemModalHidden} isItemModalHidden = {isItemModalHidden} currentItem={currentItem} setCurrentItem={setCurrentItem} setCanMove = {setCanMove} playerInventory={playerInventory} setPlayerInventory={setPlayerInventory}></Menu>}
+      {!gameIsStarted && currentScreen === "Title" && <Title setGameIsStarted = {setGameIsStarted} currentScreen = {currentScreen} setCurrentScreen = {setCurrentScreen}></Title>}
+      {!gameIsStarted && currentScreen === "Settings" && <Settings setCurrentScreen = {setCurrentScreen}> </Settings>}
+      {!gameIsStarted && currentScreen === "Extras" && <Extras setCurrentScreen = {setCurrentScreen}></Extras>}
+      {!gameIsStarted && currentScreen === "Help" && <Help setCurrentScreen = {setCurrentScreen}></Help>}
+      {!gameIsStarted && currentScreen === "Achievements" && <Achievements setCurrentScreen = {setCurrentScreen}></Achievements>}
       <Router>
         <>
         </>
