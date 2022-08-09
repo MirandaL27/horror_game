@@ -11,39 +11,29 @@ class Help {
     addFile(file){
         this.helpFileSystem.push(file);
     }
-    getRoot() {
-        //console.log(this.helpFileSystem);
-        for(let i=0;i<this.helpFileSystem.length;i++){
-            if(this.helpFileSystem[i].getPath().match(/[\/]{1}(.)+[\/]{1}/)){
-                return this.helpFileSystem[i];
-            }
-        }
-        return null;
-    }
     searchFileSystem(topic){
-        //return all of the help files that contain the topic string in their names
+        //return all of the help files that contain the topic string in their paths
+        //order them by the depth of the match and then by lexicgraphical order
         let output = [];
-        this.searchHelper(topic, output, this.getRoot(), 1);
-        return output;
-    }
-    searchHelper(topic, output, current, depth){
-        //console.log(current);
-        if(!current.isDirectory()){
-            //we're at the end of a path
-            if(current.getName().includes(topic)){
-                output.push(current);
+        for(let i=0; i<this.helpFileSystem.length;i++){
+            let path = this.helpFileSystem[i].getPath();
+            if(!this.helpFileSystem[i].isDirectory() && path.includes(topic)){
+                let arr = path.split("/");
+                const match = arr.findLastIndex((element, index) => {
+                    if (element.includes(topic)) {
+                      return index;
+                    }
+                  });
+                output.push({matchDepth: match, file: this.helpFileSystem[i]});
             }
-            return;
         }
-        //go to all the paths 
-        //console.log(this.helpFileSystem[0].getPath().split("/").length);
-           let temp = this.helpFileSystem.filter((elem) =>
-                 elem.getPath().includes(current.getPath()) && elem.getPath().split("/").length > depth + 2);
-           console.log(temp);
-           for(let i=0;i<temp.length;i++){
-            this.searchHelper(topic, output, temp[i], depth+1);
-           } 
-           return; 
+        output.sort((a,b) => {
+            if(b.matchDepth === a.matchDepth){
+                return a.file.getPath().localeCompare(b.file.getPath());
+            }
+            return b.matchDepth - a.matchDepth;
+        });
+        return output;
     }
 }
 
@@ -58,11 +48,24 @@ help.addDirectory(temp);
 temp = new HelpDirectory();
 temp.setDirectory("Controls", "/External Controls/Settings/Controls/");
 help.addDirectory(temp);
+temp = new HelpDirectory();
+temp.setDirectory("Controls", "/External Controls/Settings/Volume/");
+help.addDirectory(temp);
 temp = new HelpFile();
-temp.setFile("Default Options","/External Controls/Settings/Controls/Default Options/","Control Options - Default","The default option for in-game control configuration is the arrow keys for navigation, and mouse clicks for everything else.");
+temp.setFile("Default Options","/External Controls/Settings/Controls/Default Options/","Control Options - Default","There are default control configuration presets for both right and left-handed players.  These can be found and selected from the presets dropdown on the controls section of the settings screen.");
+help.addFile(temp);
+temp = new HelpFile();
+temp.setFile("Custom Options","/External Controls/Settings/Controls/Custom Options/","Control Options - Custom","Custom control configurations can be set up by selecting buttons from the dropdowns that correspond to each of the controls on the settings screen.");
+help.addFile(temp);
+temp = new HelpFile();
+temp.setFile("Music Volume","/External Controls/Settings/Volume/Music Volume/","Volume - Music","Music volume can be configured by toggling the music volume bar on the settings screen.");
+help.addFile(temp);
+temp = new HelpFile();
+temp.setFile("Sound Volume","/External Controls/Settings/Volume/Sound Volume/","Volume - Sound","Sound volume can be configured by toggling the sound volume bar on the settings screen.");
 help.addFile(temp);
 
-console.log(help.searchFileSystem("Default"));
-
+//console.log(help.searchFileSystem("Default"));
+//console.log(help.searchFileSystem("Options"));
+//console.log(help.searchFileSystem("Controls"));
 
 export default help;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Button = (props) => {
-    const {text, isDisabled, link, height, width, posX, posY, isShowing, className, setCurrentScreen, setGameIsStarted, onClick} = props;
+    const {text, isDisabled, link, height, width, posX, posY, isShowing, className, setCurrentScreen, setGameIsStarted, onClick, help, search, setSearchResults} = props;
     
     const handleButtonClick = (event) => {
         if(event.target.className.includes("resume")){
