@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Button = (props) => {
-    const {text, isDisabled, link, height, width, posX, posY, isShowing, className, setCurrentScreen, setGameIsStarted} = props;
+    const {text, isDisabled, link, height, width, posX, posY, isShowing, className, setCurrentScreen, setGameIsStarted, onClick} = props;
     
     const handleButtonClick = (event) => {
         if(event.target.className.includes("resume")){
@@ -33,7 +33,7 @@ const Button = (props) => {
         <div>
             {
                 isShowing &&
-                <button className={`clickable ${className}`} onClick = {handleButtonClick} disabled = {isDisabled} style={{height: `${height}px`, width: `${width}px`}}>{text}
+                <button className={`clickable ${className}`} onClick = {!onClick? handleButtonClick: onClick} disabled = {isDisabled} style={{height: `${height}px`, width: `${width}px`}}>{text}
                 </button>
             }
         </div>
