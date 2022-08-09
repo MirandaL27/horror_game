@@ -11,10 +11,22 @@ class Help {
     addFile(file){
         this.helpFileSystem.push(file);
     }
+    getAllEntriesFromDepth(depth){
+        return this.helpFileSystem.filter((elem) => elem.getPath().split("/").length === depth + 2);
+    }
+    getAllEntriesFromDepthWithPath(depth, path){
+        if(path === ""){
+            return this.getAllEntriesFromDepth(depth);
+        }
+        return this.helpFileSystem.filter((elem) => elem.getPath().split("/").length === depth + 2 && elem.getPath().includes(path));
+    }
     searchFileSystem(topic){
         //return all of the help files that contain the topic string in their paths
         //order them by the depth of the match and then by lexicgraphical order
         let output = [];
+        if(topic === ""){
+            return output;
+        }
         for(let i=0; i<this.helpFileSystem.length;i++){
             let path = this.helpFileSystem[i].getPath();
             if(!this.helpFileSystem[i].isDirectory() && path.includes(topic)){
@@ -41,6 +53,15 @@ class Help {
 let help = new Help();
 let temp = new HelpDirectory();
 temp.setDirectory("External Controls","/External Controls/");
+help.addDirectory(temp);
+temp = new HelpDirectory();
+temp.setDirectory("In-Game Controls","/In-Game Controls/");
+help.addDirectory(temp);
+temp = new HelpDirectory();
+temp.setDirectory("In-Game Hints","/In-Game Hints/");
+help.addDirectory(temp);
+temp = new HelpDirectory();
+temp.setDirectory("Icons","/Icons/");
 help.addDirectory(temp);
 temp = new HelpDirectory();
 temp.setDirectory("Settings","/External Controls/Settings/");
